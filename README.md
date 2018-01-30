@@ -1,24 +1,33 @@
-# README
+# Secret Friend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is made to the OneBitCode Bootcamp. You can checkout my code here.
 
-Things you may want to cover:
+## Configuration
 
-* Ruby version
+To build this project. Make sure you have the [Docker](https://docker.com) installed on your machine.
 
-* System dependencies
+To build using Docker, run:
 
-* Configuration
+```bash
+docker-compose build && docker-compose run --rm site bundle install
+```
 
-* Database creation
+And to open up the app, run:
 
-* Database initialization
+```bash
+docker-compose up
+```
 
-* How to run the test suite
+### Initialization
 
-* Services (job queues, cache servers, search engines, etc.)
+To create our database, use `rails db:create`. After that you can migrate all the tables availables with `rails db:migrate`
 
-* Deployment instructions
+## Tests
 
-* ...
+To run our tests, simply put the `rspec` command on terminal.
+
+## Services
+
+### Mail
+
+In development we use [Mailcatcher](https://mailcatcher.me/). So when you open up the application the server is started on `http://localhost:1080`

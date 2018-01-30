@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users,
     :controllers => { registrations: 'registrations' },
@@ -7,4 +9,6 @@ Rails.application.routes.draw do
       :sign_out => 'logout',
       :sign_up => 'signup'
     }
+
+  mount Sidekiq::Web => '/sidekiq'
 end

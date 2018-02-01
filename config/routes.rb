@@ -1,6 +1,11 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resource :members, except: [:new, :edit, :show, :index, ]
+  resource :campaigns, except: [:new, :edit]
+
+  get 'pages/home'
+
   devise_for :users,
     :controllers => { registrations: 'registrations' },
     :path => '',

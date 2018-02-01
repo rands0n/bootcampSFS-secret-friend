@@ -1,10 +1,17 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resource :members, except: [:new, :edit, :show, :index, ]
-  resource :campaigns, except: [:new, :edit]
+  root to: 'pages#home'
 
-  get 'pages/home'
+  mount Sidekiq::Web => '/sidekiq'
+
+  resource :members, only: [:create, :destroy, :update]
+
+  resource :campaigns, except: [:new] do
+    post 'raffle', on: :member
+  end
+
+  get 'members/:token/opened', to: 'members#opened'
 
   devise_for :users,
     :controllers => { registrations: 'registrations' },
@@ -14,6 +21,4 @@ Rails.application.routes.draw do
       :sign_out => 'logout',
       :sign_up => 'signup'
     }
-
-  mount Sidekiq::Web => '/sidekiq'
 end

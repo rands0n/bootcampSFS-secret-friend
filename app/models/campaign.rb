@@ -13,6 +13,8 @@ class Campaign < ApplicationRecord
 
   validates :title, :description, :user, :status, presence: true
 
+  scope :count_opened, -> { includes(:members).where(open: true).count }
+
   private
 
   def set_member

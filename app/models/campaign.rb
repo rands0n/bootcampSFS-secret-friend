@@ -3,6 +3,9 @@ class Campaign < ApplicationRecord
 
   has_many :members, dependent: :destroy
 
+  before_validation :set_member, on: :create
+  before_validation :set_status, on: :create
+
   before_create :set_member
   before_create :set_status
 
@@ -13,10 +16,7 @@ class Campaign < ApplicationRecord
   private
 
   def set_member
-    self.members = Member.create(
-      name: self.user.name,
-      email: self.user.email
-    )
+    self.members << Member.create(name: self.user.name, email: self.user.email)
   end
 
   def set_status

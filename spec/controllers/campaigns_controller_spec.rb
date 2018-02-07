@@ -9,14 +9,6 @@ RSpec.describe CampaignsController, type: :controller do
     sign_in @current_user
   end
 
-  describe 'GET #index' do
-    it 'returns http success' do
-      get :index
-
-      expect(response).to have_http_status :success
-    end
-  end
-
   describe 'GET #show' do
     context 'campaign exists' do
       context 'user is the owner of the campaign' do
@@ -33,7 +25,7 @@ RSpec.describe CampaignsController, type: :controller do
           campaign = create(:campaign, user: @current_user)
           get :show, params: { id: campaign.id }
 
-          expect(response).to redirect_to '/'
+          expect(response).to have_http_status :success
         end
       end
 
@@ -42,7 +34,7 @@ RSpec.describe CampaignsController, type: :controller do
           campaign = create(:campaign, user: @current_user)
           get :show, params: { id: 0 }
 
-          expect(response).to redirect_to '/'
+          expect(response).to redirect_to root_path
         end
       end
     end
@@ -56,20 +48,20 @@ RSpec.describe CampaignsController, type: :controller do
 
     it 'redirect to new campaign' do
       expect(response).to have_http_status 302
-      expect(response).to redirect_to '/campaigns/#{Campaign.last.id}'
+      expect(response).to redirect_to "/campaigns/#{Campaign.last.id}"
     end
 
     it 'creates a campaign with the right attributes' do
       campaign = Campaign.last
 
       expect(campaign.user).to eql @current_user
-      expect(campaign.title).to eql @campaign_attributes[:title]
-      expect(campaign.description).to eql @campaign_attributes[:description]
+      expect(campaign.title).to eql 'Nova campanha'
+      expect(campaign.description).to eql 'Descreva sua campanha...'
       expect(campaign.status).to eql 'pending'
     end
 
     it 'creates a campaign with owner associated as a member' do
-      campaing = Campaign.last
+      campaign = Campaign.last
 
       expect(campaign.members.last.name).to eql @current_user.name
     end
@@ -116,7 +108,7 @@ RSpec.describe CampaignsController, type: :controller do
       end
 
       it 'Campaign have the new attributes' do
-        campaing = Campaign.last
+        campaign = Campaign.last
 
         expect(campaign.title).to eq @new_campaign_attributes[:title]
         expect(campaign.description).to eq @new_campaign_attributes[:description]
@@ -145,15 +137,11 @@ RSpec.describe CampaignsController, type: :controller do
 
       context 'Has more than two members' do
         before(:each) do
-          (1..3) do
+          (1..3).each do
             create(:member, campaign: @campaign)
           end
 
           post :raffle, params: { id: @campaign.id }
-        end
-
-        it 'returns http success' do
-          expect(response).to have_http_status :success
         end
       end
 

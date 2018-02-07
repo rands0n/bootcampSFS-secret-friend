@@ -10,7 +10,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.save
         format.html { redirect_to root_url }
-        format.json { render json: true }
+        format.json { render json: @member }
       else
         format.html { render :new }
         format.json { render json: @member.errors, status: :unprocessable_entity }

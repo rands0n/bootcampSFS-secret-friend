@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SecretFriend</title>
-    <%= csrf_meta_tags %>
+<head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <title>Amigo Secreto</title>
+  <%= csrf_meta_tags %>
 
-  <body>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= favicon_link_tag %>
+</head>
+<body>
+  <header>
+    <%= render 'shared/navbar' %>
+  </header>
+
+  <div class="container">
     <%= yield %>
-  </body>
+  </div>
+  <!-- /container -->
+</body>
 </html>

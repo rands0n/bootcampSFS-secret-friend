@@ -17,6 +17,8 @@ gem 'materialize-sass'
 gem 'material_icons'
 gem 'redis', '~> 3.0'
 gem 'sidekiq'
+gem 'inky-rb', require: 'inky'
+gem 'premailer-rails'
 # gem 'therubyracer', platforms: :ruby
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development

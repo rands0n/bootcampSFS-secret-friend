@@ -14,13 +14,16 @@
     <%= render 'shared/navbar' %>
   </header>
 
-  <div class="container">
-    <%= yield %>
-  </div>
-  <!-- /container -->
+  <main>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <!-- /container -->
+  </main>
 
-  <footer>
+  <footer class="center">
     <%= render 'shared/footer' %>
   </footer>
+  <!-- /center -->
 </body>
 </html>

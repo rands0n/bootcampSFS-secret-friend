@@ -3,11 +3,11 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   root to: 'pages#home'
 
-  mount Sidekiq::Web => '/sidekiq'
+  # mount Sidekiq::Web => '/sidekiq'
 
   resource :members, only: [:create, :destroy, :update]
 
-  resource :campaigns, except: [:new] do
+  resources :campaigns, except: [:new] do
     post 'raffle', on: :member
   end
 

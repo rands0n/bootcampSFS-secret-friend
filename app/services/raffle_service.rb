@@ -12,7 +12,7 @@ class RaffleService
     i = 0
 
     while(members_list.count != 1)
-      m = members_list[f]
+      m = members_list[i]
 
       i += 1
 

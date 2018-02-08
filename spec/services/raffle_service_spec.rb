@@ -8,9 +8,10 @@ describe RaffleService, type: :service do
   describe '#call' do
     context 'when has more then two members' do
       before :each do
-        (1..3).each do
-          create(:member, campaign: @campaign)
-        end
+        create(:member, campaign: @campaign)
+        create(:member, campaign: @campaign)
+        create(:member, campaign: @campaign)
+
         @campaign.reload
 
         @results = RaffleService.new(@campaign).call

@@ -1,4 +1,4 @@
-$(document).on 'turbolinks:load' ->
+$(document).on 'turbolinks:load', ->
   $('.update_campaign input').bind 'blur', ->
     $('.update_campaign').submit()
 
@@ -19,7 +19,7 @@ $(document).on 'turbolinks:load' ->
       dataType: 'json',
       data: {}
       success: (data, text, jqXHR) ->
-        $(location).attr('href','/campaigns');
+        $(location).attr('href','/campaigns')
       error: (jqXHR, textStatus, errorThrown) ->
         Materialize.toast('Problema na remoção da Campanha', 4000, 'red')
     return false

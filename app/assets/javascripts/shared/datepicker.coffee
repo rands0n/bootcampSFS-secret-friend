@@ -1,4 +1,4 @@
-$(document).on 'turbolinks:load' ->
+$(document).on 'turbolinks:load', ->
   $('.datepicker').datepicker({
     selectMonths: true,
     selectYears: 5,
